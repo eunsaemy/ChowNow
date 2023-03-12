@@ -46,7 +46,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <View
+    <KeyboardAvoidingView
       style={styles.container}
       behavior="padding">
       <View style={styles.imageContainer}>
@@ -56,7 +56,7 @@ const LoginScreen = () => {
         />
       </View>
 
-      <KeyboardAvoidingView style={styles.inputContainer}>
+      <View style={styles.inputContainer}>
         <Text style={styles.heading3}>Chow anytime, chow now.</Text>
         <Text style={styles.bodyText}>Log in to your Chow Now account.</Text>
 
@@ -73,7 +73,7 @@ const LoginScreen = () => {
           style={[styles.input, styles.marginTopMedium]}
           secureTextEntry
         />
-      </KeyboardAvoidingView>
+      </View>
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -87,7 +87,7 @@ const LoginScreen = () => {
           <Text style={styles.buttonOutlineText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
