@@ -1,5 +1,6 @@
 import useNavigation from "@react-navigation/native";
 import Icon from "react-native-ionicons";
+import ConfirmScreen from "./screens/ConfirmScreen";
 import HomeScreen from "./screens/HomeScreen";
 import HomeTitle from "./components/HomeTitle";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -137,7 +138,7 @@ export default function App() {
           component={Restaurant}
         />
         <Stack.Screen
-          name="HomeScreen"
+          name="Home"
           component={Home}
           options={{ headerShown: false }}
         />
@@ -152,6 +153,11 @@ export default function App() {
           name="SignUp2"
           options={{ headerShown: false }}
           component={SignUp2Screen}
+        />
+        <Stack.Screen
+          name="Confirm"
+          options={{ headerShow: false }}
+          component={ConfirmScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
