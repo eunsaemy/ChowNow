@@ -18,6 +18,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
+  const [inputFocused, setInputFocused] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -49,12 +51,14 @@ const LoginScreen = () => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior="padding">
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={require("../assets/burger.png")}
-        />
-      </View>
+      {!inputFocused && (
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={require("../assets/burger.png")}
+          />
+        </View>
+      )}
 
       <View style={styles.inputContainer}>
         <Text style={styles.heading3}>Chow anytime, chow now.</Text>
@@ -63,13 +67,17 @@ const LoginScreen = () => {
         <TextInput
           placeholder="Email"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
+          onSubmitEditing={(text) => setEmail(text)}
           style={[styles.input, styles.marginTopMedium]}
         />
         <TextInput
           placeholder="Password"
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onSubmitEditing={(text) => setPassword(text)}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
           style={[styles.input, styles.marginTopMedium]}
           secureTextEntry
         />

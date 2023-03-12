@@ -54,7 +54,7 @@ const HomeScreen = () => {
         <View style={styles.bottomNavButton}>
           <Image
             style={styles.bottomNavButtonImage}
-            source={require("../assets/home-active.png")}
+            source={require("../assets/home-active-48.png")}
           />
           <Text>Home</Text>
         </View>
@@ -62,7 +62,7 @@ const HomeScreen = () => {
         <View style={styles.bottomNavButton}>
           <Image
             style={styles.bottomNavButtonImage}
-            source={require("../assets/browse-inactive.png")}
+            source={require("../assets/browse-inactive-48.png")}
           />
           <Text>Browse</Text>
         </View>
@@ -70,7 +70,7 @@ const HomeScreen = () => {
         <View style={styles.bottomNavButton}>
           <Image
             style={styles.bottomNavButtonImage}
-            source={require("../assets/cart-inactive.png")}
+            source={require("../assets/cart-inactive-48.png")}
           />
           <Text>Cart</Text>
         </View>
@@ -78,7 +78,7 @@ const HomeScreen = () => {
         <View style={styles.bottomNavButton}>
           <Image
             style={styles.bottomNavButtonImage}
-            source={require("../assets/profile-inactive.png")}
+            source={require("../assets/profile-inactive-48.png")}
           />
           <Text>Profile</Text>
         </View>
@@ -107,6 +107,10 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderColor: "#EEEEEE",
+    borderTopWidth: 1.25,
   },
   button: {
     backgroundColor: "#0782F9",
@@ -127,7 +131,11 @@ const styles = StyleSheet.create({
   bottomNavButton: {
     display: "flex",
     flexDirection: "column",
-    gap: 4,
+    gap: 5,
     alignItems: "center",
+  },
+  bottomNavButtonImage: {
+    width: 32,
+    height: 32,
   },
 });
