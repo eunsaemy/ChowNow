@@ -1,5 +1,4 @@
 import React from "react";
-import { auth } from "../firebase";
 import {
   ScrollView,
   StyleSheet,
@@ -8,81 +7,23 @@ import {
   View,
   Image,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import RestaurantCard from "../components/RestaurantCard";
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
-
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("Login");
-      })
-      .catch((error) => alert(error.message));
-  };
-
   return (
     <View style={styles.container}>
-      <Text>Email: {auth.currentUser?.email}</Text>
-      <TouchableOpacity
-        onPress={handleSignOut}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Sign Out</Text>
-      </TouchableOpacity>
-
-      <ScrollView style={styles.scrollContainer}>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
-        <Text style={styles.largeText}>Hello hello</Text>
+      <ScrollView
+        style={styles.scrollContainer}
+        contentContainerStyle={{
+          rowGap: 0,
+        }}>
+        <RestaurantCard></RestaurantCard>
+        <RestaurantCard></RestaurantCard>
+        <RestaurantCard></RestaurantCard>
+        <RestaurantCard></RestaurantCard>
+        <RestaurantCard></RestaurantCard>
+        <RestaurantCard></RestaurantCard>
       </ScrollView>
-
-      <View style={styles.bottomNavContainer}>
-        <TouchableOpacity style={styles.bottomNavButton}>
-          <Image
-            style={styles.bottomNavButtonImage}
-            source={require("../assets/home-active-48.png")}
-          />
-          <Text style={styles.bottomNavTextActive}>Home</Text>
-        </TouchableOpacity>
-
-        <View style={styles.bottomNavButton}>
-          <Image
-            style={styles.bottomNavButtonImage}
-            source={require("../assets/browse-inactive-48.png")}
-          />
-          <Text style={styles.bottomNavTextInactive}>Browse</Text>
-        </View>
-
-        <View style={styles.bottomNavButton}>
-          <Image
-            style={styles.bottomNavButtonImage}
-            source={require("../assets/cart-inactive-48.png")}
-          />
-          <Text style={styles.bottomNavTextInactive}>Cart</Text>
-        </View>
-
-        <View style={styles.bottomNavButton}>
-          <Image
-            style={styles.bottomNavButtonImage}
-            source={require("../assets/profile-inactive-48.png")}
-          />
-          <Text style={styles.bottomNavTextInactive}>Profile</Text>
-        </View>
-      </View>
     </View>
   );
 };
@@ -91,14 +32,15 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    padding: 20,
+    paddingBottom: 0,
     flex: 1,
-    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 80,
   },
   scrollContainer: {
     width: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   bottomNavContainer: {
     width: "100%",

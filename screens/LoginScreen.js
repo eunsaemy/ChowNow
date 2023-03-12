@@ -68,7 +68,7 @@ const LoginScreen = () => {
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          style={[styles.input, styles.marginTopMedium]}
+          style={styles.input}
           onFocus={() => setInputFocused(true)}
           onBlur={() => setInputFocused(false)}
         />
@@ -105,11 +105,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    marginBottom: 100,
+    marginBottom: 40,
     margin: 20,
     marginTop: 80,
     justifyContent: "space-between",
-    gap: 40,
   },
   imageContainer: { flex: 1 },
   image: {
@@ -124,7 +123,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     width: "100%",
-    justifyContent: "center",
     marginTop: 40,
   },
   input: {
