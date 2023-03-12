@@ -6,7 +6,10 @@ import { Image } from "react-native";
 import { StyleSheet } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import RadioButtonRN from "radio-buttons-react-native";
+// import RadioButtonRN from "radio-buttons-react-native";
+import { send_sms } from "../send_sms";
+import { auth, db } from '../firebase';
+import { collection, doc, getDoc } from 'firebase/firestore';
 
 import {
   useFonts,
@@ -44,7 +47,28 @@ export default function RestaurantCard() {
     navigation.replace("Home");
   }
 
-  const handleSend = () => {
+  const getAddress = async () => {
+    const docRef = doc(db, "Users", auth.currentUser.uid);
+    const docSnap = await getDoc(docRef);
+
+    return docSnap.data().address;
+  };
+
+  const getPhone = async () => {
+    const docRef = doc(db, "Users", auth.currentUser.uid);
+    const docSnap = await getDoc(docRef);
+
+    return docSnap.data().phone;
+  };
+
+  const handleSend = async () => {
+    let address = await getAddress();
+    let phone = await getPhone();
+    
+    let formatted_msg = `Please send help to ${phone} at ${address.streetNumber} ${address.street}, ${address.city}, ${address.region} ${address.postalCode}`;
+    // setMsg(formatted_msg);
+    // send_sms(formatted_msg);
+    console.log(formatted_msg);
     navigation.replace("Confirm");
   }
 
@@ -101,7 +125,7 @@ export default function RestaurantCard() {
 
           <View>
             <Text style={styles.captionText}>Is anyone hurt?</Text>
-            <RadioButtonRN
+            {/* <RadioButtonRN
               deactiveColor={"#E0e0e0"}
               boxActiveBgColor={"#FFF3E6"}
               activeColor={"#F57C00"}
@@ -109,7 +133,7 @@ export default function RestaurantCard() {
               boxStyle={[{ borderColor: "#EEEeee" }, { borderRadius: 12 }]}
               textStyle={{ fontSize: 16 }}
               selectedBtn={(e) => console.log(e)}
-            />
+            /> */}
           </View>
 
           <View style={styles.inputContainer}>
@@ -136,7 +160,7 @@ export default function RestaurantCard() {
         </ScrollView>
 
         <TouchableOpacity onPress={handleSend} style={[styles.button, styles.buttonPrimary]}>
-          <Text style={styles.buttonText}>Enable location services</Text>
+          <Text style={styles.buttonText}>Request for help</Text>
         </TouchableOpacity>
       </View>
     </View>
