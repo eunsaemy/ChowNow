@@ -23,18 +23,6 @@ const LoginScreen = () => {
 
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //     onAuthStateChanged(auth, (user) => {
-  //         if (user) {
-  //             navigation.replace("Home")
-  //         }
-  //         // getDoc(doc(db, "Users", user.uid))
-  //         // .then((doc) => {
-  //         //     phone = doc.data().phone
-  //         // }
-  //     })
-  // }, [])
-
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -52,7 +40,7 @@ const LoginScreen = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         navigation.replace("Home");
-        // navigation.replace("SignUp1")
+        // navigation.replace("SignUp2")
       })
       .catch((error) => alert(error.message));
   };
