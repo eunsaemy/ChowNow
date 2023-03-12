@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { auth, db } from '../firebase'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
-import { collection, doc, addDoc, setDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -11,22 +11,26 @@ const LoginScreen = () => {
 
     const navigation = useNavigation()
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                navigation.replace("Home")
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             navigation.replace("Home")
+    //         }
+    //         // getDoc(doc(db, "Users", user.uid))
+    //         // .then((doc) => {
+    //         //     phone = doc.data().phone
+    //         // }
+    //     })
+    // }, [])
 
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log('Signed up with:', user.email);
                 setDoc(doc(db, "Users", user.uid), {
-                    email: user.email
+                    email: user.email,
                 })
+                navigation.replace("SignUp1")
             })
             .catch((error) => alert(error.message))
     };
@@ -35,7 +39,7 @@ const LoginScreen = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log('Logged in with:', user.email);
+                navigation.replace("Home")
             })
             .catch((error) => alert(error.message))
     };
