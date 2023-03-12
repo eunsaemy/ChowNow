@@ -67,18 +67,18 @@ const LoginScreen = () => {
         <TextInput
           placeholder="Email"
           value={email}
+          onChangeText={(text) => setEmail(text)}
+          style={styles.input}
           onFocus={() => setInputFocused(true)}
           onBlur={() => setInputFocused(false)}
-          onSubmitEditing={(text) => setEmail(text)}
-          style={[styles.input, styles.marginTopMedium]}
         />
         <TextInput
           placeholder="Password"
           value={password}
-          onSubmitEditing={(text) => setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
+          style={styles.input}
           onFocus={() => setInputFocused(true)}
           onBlur={() => setInputFocused(false)}
-          style={[styles.input, styles.marginTopMedium]}
           secureTextEntry
         />
       </View>
