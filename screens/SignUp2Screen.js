@@ -36,7 +36,7 @@ const SignUp2Screen = () => {
   }, []);
 
   const handleDone = () => {
-    navigation.replace("Home");
+    navigation.replace("HomeScreen");
   };
 
   const geocode = async () => {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "100%",
-    padding: 20,
+    padding: 16,
     borderRadius: 12,
     alignItems: "center",
   },
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
   container: {
     margin: 20,
     display: "flex",
+    marginTop: 80,
     flex: 1,
     marginBottom: 40,
     justifyContent: "space-between",

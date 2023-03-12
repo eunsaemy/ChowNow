@@ -3,10 +3,19 @@ import { StyleSheet } from "react-native";
 import { Text } from "react-native";
 import { Image } from "react-native";
 import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/core";
 
 export default function RestaurantCard() {
+  const navigation = useNavigation();
+
+  const cardClicked = () => {
+    navigation.replace("Restaurant");
+  };
+
   return (
-    <TouchableOpacity style={styles.restaurantCard}>
+    <TouchableOpacity
+      onPress={cardClicked}
+      style={styles.restaurantCard}>
       <View style={styles.restaurantImageContainer}>
         <ImageBackground
           style={styles.restaurantImage}

@@ -1,81 +1,133 @@
-import React, { useState } from 'react'
-import { auth, db } from '../firebase'
-import { doc, updateDoc } from 'firebase/firestore'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from "react";
+import { auth, db } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Image,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUp1Screen = () => {
-    const [phone, setPhone] = useState('')
+  const [phone, setPhone] = useState("");
 
-    const navigation = useNavigation()
+  const [inputFocused, setInputFocused] = useState(false);
 
-    const handlePhone = () => {
-        updateDoc(doc(db, "Users", auth.currentUser.uid), {
-            phone: phone
-        })
-        navigation.replace("SignUp2")
-    }
+  const navigation = useNavigation();
 
-    return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding"
-        >
-            <View style={styles.inputContainer}>
-                <TextInput
-                    placeholder = "Phone number"
-                    value={phone}
-                    onChangeText={text => setPhone(text)}
-                    style={styles.input}
-                    keyboardType="numeric"
-                />
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                    onPress={handlePhone}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>Next</Text>
-                </TouchableOpacity>
-            </View>
-        </KeyboardAvoidingView>
-    )
-}
+  const handlePhone = () => {
+    updateDoc(doc(db, "Users", auth.currentUser.uid), {
+      phone: phone,
+    });
+    navigation.replace("SignUp2");
+  };
 
-export default SignUp1Screen
+  return (
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding">
+      {!inputFocused && (
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={require("../assets/toast.png")}
+          />
+        </View>
+      )}
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.heading3}>
+          Enter your phone number for a better chowing experience
+        </Text>
+        <Text style={styles.bodyText}>
+          We'll use it to send you updates and make the delivery process as
+          seamless as possible.
+        </Text>
+
+        <TextInput
+          placeholder="Phone number"
+          value={phone}
+          onChangeText={(text) => setPhone(text)}
+          style={styles.input}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
+          keyboardType="numeric"
+        />
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={handlePhone}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
+  );
+};
+
+export default SignUp1Screen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    inputContainer: {
-        width: '80%'
-    },
-    input: {
-        backgroundColzontal: 15,
-        paddingVertical: 10,
-        borderRadius: 10,
-        marginTop: 5,
-    },
-    buttonContainer: {
-        width: '60%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    button: {
-        backgroundColor: '#0782F9',
-        width: '60%',
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
-    },
-})
+  imageContainer: { flex: 1, marginBottom: 20 },
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: "contain",
+  },
+  container: {
+    marginTop: 80,
+    margin: 20,
+    display: "flex",
+    flex: 1,
+    marginBottom: 40,
+    // justifyContent: "space-between",
+  },
+  inputContainer: {
+    width: "100%",
+    flex: 1,
+  },
+  input: {
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    borderRadius: 10,
+    fontSize: 16,
+  },
+  buttonContainer: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 40,
+    flex: 1,
+  },
+  button: {
+    backgroundColor: "#F57C00",
+    width: "100%",
+    padding: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    marginTop: 40,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  heading3: {
+    fontWeight: "700",
+    fontSize: 24,
+    paddingBottom: 12,
+    textAlign: "center",
+  },
+  bodyText: {
+    textAlign: "center",
+    fontSize: 16,
+    paddingBottom: 20,
+  },
+});

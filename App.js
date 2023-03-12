@@ -14,6 +14,8 @@ import { useFonts } from "expo-font";
 import { useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import Restaurant from "./screens/Restaurant";
+import RestaurantCard from "./components/RestaurantCard";
 
 const Stack = createNativeStackNavigator();
 
@@ -92,7 +94,7 @@ function Home({ navigation }) {
                 style={{ width: size, height: size }}
                 source={
                   focused
-                    ? require("./assets/home-active-48.png")
+                    ? require("./assets/profile-active-48.png")
                     : require("./assets/profile-inactive-48.png")
                 }
               />
@@ -125,24 +127,30 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          style={styles.text}
           options={{ headerShown: false }}
           name="Login"
           component={LoginScreen}
         />
         <Stack.Screen
-          name="Home"
+          options={{ headerShown: false }}
+          name="Restaurant"
+          component={Restaurant}
+        />
+        <Stack.Screen
+          name="HomeScreen"
           component={Home}
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="SignUp1"
           style={styles.text}
+          options={{ headerShown: false }}
           component={SignUp1Screen}
         />
         <Stack.Screen
           styles="style.text"
           name="SignUp2"
+          options={{ headerShown: false }}
           component={SignUp2Screen}
         />
       </Stack.Navigator>
