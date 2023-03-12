@@ -68,7 +68,7 @@ const LoginScreen = () => {
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          style={styles.input}
+          style={[styles.input, styles.marginTopMedium]}
           onFocus={() => setInputFocused(true)}
           onBlur={() => setInputFocused(false)}
         />
@@ -76,7 +76,7 @@ const LoginScreen = () => {
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
-          style={styles.input}
+          style={[styles.input, styles.marginTopMedium]}
           onFocus={() => setInputFocused(true)}
           onBlur={() => setInputFocused(false)}
           secureTextEntry
@@ -105,12 +105,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
+    marginBottom: 100,
     margin: 20,
     marginTop: 80,
-    justifyContent: "center",
+    justifyContent: "space-between",
     gap: 40,
-    alignContent: "center",
-    fontFamily: "Karla-Regular",
   },
   imageContainer: { flex: 1 },
   image: {
@@ -122,7 +121,12 @@ const styles = StyleSheet.create({
   marginTopMedium: {
     marginTop: 20,
   },
-  inputContainer: { flex: 1, width: "100%", alignContent: "center" },
+  inputContainer: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    marginTop: 40,
+  },
   input: {
     backgroundColor: "white",
     paddingHorizontal: 15,
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   button: {

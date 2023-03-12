@@ -51,20 +51,20 @@ const HomeScreen = () => {
       </ScrollView>
 
       <View style={styles.bottomNavContainer}>
-        <View style={styles.bottomNavButton}>
+        <TouchableOpacity style={styles.bottomNavButton}>
           <Image
             style={styles.bottomNavButtonImage}
             source={require("../assets/home-active-48.png")}
           />
-          <Text>Home</Text>
-        </View>
+          <Text style={styles.bottomNavTextActive}>Home</Text>
+        </TouchableOpacity>
 
         <View style={styles.bottomNavButton}>
           <Image
             style={styles.bottomNavButtonImage}
             source={require("../assets/browse-inactive-48.png")}
           />
-          <Text>Browse</Text>
+          <Text style={styles.bottomNavTextInactive}>Browse</Text>
         </View>
 
         <View style={styles.bottomNavButton}>
@@ -72,7 +72,7 @@ const HomeScreen = () => {
             style={styles.bottomNavButtonImage}
             source={require("../assets/cart-inactive-48.png")}
           />
-          <Text>Cart</Text>
+          <Text style={styles.bottomNavTextInactive}>Cart</Text>
         </View>
 
         <View style={styles.bottomNavButton}>
@@ -80,7 +80,7 @@ const HomeScreen = () => {
             style={styles.bottomNavButtonImage}
             source={require("../assets/profile-inactive-48.png")}
           />
-          <Text>Profile</Text>
+          <Text style={styles.bottomNavTextInactive}>Profile</Text>
         </View>
       </View>
     </View>
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 10,
+    paddingBottom: 5,
     borderColor: "#EEEEEE",
     borderTopWidth: 1.25,
   },
@@ -135,7 +135,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bottomNavButtonImage: {
-    width: 32,
-    height: 32,
+    width: 30,
+    height: 30,
+  },
+  bottomNavTextInactive: {
+    color: "#757575",
+    fontWeight: 400,
+  },
+  bottomNavTextActive: {
+    color: "#F57C00",
+    fontWeight: 600,
   },
 });
