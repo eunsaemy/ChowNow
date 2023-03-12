@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { collection, doc, addDoc, setDoc } from 'firebase/firestore'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -23,6 +24,9 @@ const LoginScreen = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log('Signed up with:', user.email);
+                setDoc(doc(db, "Users", user.uid), {
+                    email: user.email
+                })
             })
             .catch((error) => alert(error.message))
     };

@@ -15,7 +15,6 @@ const HomeScreen = () => {
             .catch((error) => alert(error.message))
     }
 
-
     return (
         <View style={styles.container}>
             <Text>Email: {auth.currentUser?.email}</Text>
