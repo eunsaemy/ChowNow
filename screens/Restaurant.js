@@ -7,24 +7,11 @@ import { StyleSheet } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import RadioButtonRN from "radio-buttons-react-native";
-
-import {
-  useFonts,
-  Karla_400Regular,
-  Karla_500Medium,
-  Karla_600SemiBold,
-  Karla_700Bold,
-  Karla_800ExtraBold,
-} from "@expo-google-fonts/karla";
+import React, { useEffect, useState } from "react";
+import MenuItem from "../components/MenuItem";
 
 export default function RestaurantCard() {
-  let [fontsLoaded] = useFonts({
-    Karla_400Regular,
-    Karla_500Medium,
-    Karla_600SemiBold,
-    Karla_700Bold,
-    Karla_800ExtraBold,
-  });
+  const [inputFocused, setInputFocused] = useState(false);
 
   const data = [
     {
@@ -42,11 +29,11 @@ export default function RestaurantCard() {
 
   const handleBack = () => {
     navigation.replace("Home");
-  }
+  };
 
   const handleSend = () => {
     navigation.replace("Confirm");
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -55,13 +42,19 @@ export default function RestaurantCard() {
           style={styles.image}
           source={require("../assets/burger-img.png")}>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={handleBack} style={styles.iconButton}>
+            <TouchableOpacity
+              onPress={handleBack}
+              style={styles.iconButton}>
               <Image
                 style={styles.iconButtonImage}
                 source={require("../assets/close-icon-button.png")}></Image>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity
+              onPress={() =>
+                inputFocused ? setInputFocused(false) : setInputFocused(true)
+              }
+              style={styles.iconButton}>
               <Image
                 style={styles.iconButtonImage}
                 source={require("../assets/ellipsis-icon-button.png")}></Image>
@@ -70,75 +63,109 @@ export default function RestaurantCard() {
         </ImageBackground>
       </View>
 
-      <View style={styles.contentContainer}>
-        <View style={styles.contentRow}>
-          <Text style={styles.heading3}>Burger Bungalow</Text>
-          <View style={styles.starRatingContainer}>
-            <Text style={styles.starRating}>3.6</Text>
-            <Image
-              style={styles.starRatingIcon}
-              source={require("../assets/star-icon.png")}></Image>
-          </View>
-        </View>
-        <Text style={styles.bodyText}>$2.99 delivery fee • 25—50 minutes</Text>
-
-        <ScrollView
-          style={styles.inputsContainer}
-          contentContainerStyle={{
-            rowGap: 24,
-          }}>
-          <View style={styles.inputContainer}>
-            <View style={styles.inputRow}>
+      {inputFocused && (
+        <View style={styles.contentContainer}>
+          <View style={styles.contentRow}>
+            <Text style={styles.heading3}>Burger Bungalow</Text>
+            <View style={styles.starRatingContainer}>
+              <Text style={styles.starRating}>3.6</Text>
               <Image
-                style={styles.inputImage}
-                source={require("../assets/location-icon.png")}></Image>
-              <View>
-                <Text style={styles.captionText}>Your location</Text>
-                <Text style={styles.inputText}>Location is right here</Text>
+                style={styles.starRatingIcon}
+                source={require("../assets/star-icon.png")}></Image>
+            </View>
+          </View>
+          <Text style={styles.bodyText}>
+            $2.99 delivery fee • 25—50 minutes
+          </Text>
+
+          <Text style={styles.heading4}>Buy 1 get 1 free</Text>
+          <ScrollView
+            style={styles.inputsContainer}
+            contentContainerStyle={{
+              rowGap: 24,
+            }}>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
+          </ScrollView>
+
+          <TouchableOpacity
+            onPress={handleSend}
+            style={[styles.button, styles.buttonPrimary]}>
+            <Text style={styles.buttonText}>Place order • $25.07</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {!inputFocused && (
+        <View style={styles.contentContainer}>
+          <ScrollView
+            style={styles.inputsContainer}
+            contentContainerStyle={{
+              rowGap: 24,
+            }}>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputRow}>
+                <Image
+                  style={styles.inputImage}
+                  source={require("../assets/location-icon.png")}></Image>
+                <View>
+                  <Text style={styles.captionText}>Your location</Text>
+                  <Text style={styles.inputText}>Location is right here</Text>
+                </View>
               </View>
             </View>
-          </View>
 
-          <View>
-            <Text style={styles.captionText}>Is anyone hurt?</Text>
-            <RadioButtonRN
-              deactiveColor={"#E0e0e0"}
-              boxActiveBgColor={"#FFF3E6"}
-              activeColor={"#F57C00"}
-              data={data}
-              boxStyle={[{ borderColor: "#EEEeee" }, { borderRadius: 12 }]}
-              textStyle={{ fontSize: 16 }}
-              selectedBtn={(e) => console.log(e)}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <View style={styles.inputRow}>
-              <Image
-                style={styles.inputImage}
-                source={require("../assets/emergency-icon.png")}></Image>
-              <TextInput
-                style={styles.input}
-                placeholder="What's the emergency?"></TextInput>
+            <View>
+              <Text style={styles.captionText}>Is anyone hurt?</Text>
+              <RadioButtonRN
+                deactiveColor={"#E0e0e0"}
+                boxActiveBgColor={"#FFF3E6"}
+                activeColor={"#F57C00"}
+                data={data}
+                boxStyle={[{ borderColor: "#EEEeee" }, { borderRadius: 12 }]}
+                textStyle={{ fontSize: 16 }}
+                selectedBtn={(e) => console.log(e)}
+              />
             </View>
-          </View>
 
-          <View style={styles.inputContainer}>
-            <View style={styles.inputRow}>
-              <Image
-                style={styles.inputImage}
-                source={require("../assets/time-icon.png")}></Image>
-              <TextInput
-                style={styles.input}
-                placeholder="When did this occur?"></TextInput>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputRow}>
+                <Image
+                  style={styles.inputImage}
+                  source={require("../assets/emergency-icon.png")}></Image>
+                <TextInput
+                  style={styles.input}
+                  placeholder="What's the emergency?"></TextInput>
+              </View>
             </View>
-          </View>
-        </ScrollView>
 
-        <TouchableOpacity onPress={handleSend} style={[styles.button, styles.buttonPrimary]}>
-          <Text style={styles.buttonText}>Enable location services</Text>
-        </TouchableOpacity>
-      </View>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputRow}>
+                <Image
+                  style={styles.inputImage}
+                  source={require("../assets/time-icon.png")}></Image>
+                <TextInput
+                  style={styles.input}
+                  placeholder="When did this occur?"></TextInput>
+              </View>
+            </View>
+          </ScrollView>
+
+          <TouchableOpacity
+            onPress={handleSend}
+            style={[styles.button, styles.buttonPrimary]}>
+            <Text style={styles.buttonText}>Enable location services</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
@@ -149,9 +176,11 @@ const styles = StyleSheet.create({
     height: 200,
   },
   heading3: { fontSize: 24, fontWeight: 500, marginBottom: 8 },
+  heading4: { fontSize: 20, fontWeight: 500, marginBottom: 12 },
   bodyText: {
     fontSize: 16,
     color: "#757575",
+    marginBottom: 24,
   },
   contentContainer: {
     padding: 20,
@@ -206,13 +235,10 @@ const styles = StyleSheet.create({
   inputText: {
     fontSize: 16,
     color: "#212121",
-    fontFamily: "Karla_400Regular",
-    fontFamily: "Karla_400Regular",
   },
   captionText: {
     color: "#757575",
     marginBottom: 4,
-    fontFamily: "Karla_400Regular",
   },
   inputContainer: {
     padding: 8,
@@ -262,6 +288,5 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
-    fontFamily: "Karla_600SemiBold",
   },
 });

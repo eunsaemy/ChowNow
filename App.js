@@ -109,21 +109,6 @@ function Home({ navigation }) {
 }
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    "Karla-Bold": require("./assets/fonts/Karla-Bold.ttf"),
-    "Karla-Regular": require("./assets/fonts/Karla-Regular.ttf"),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -170,8 +155,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fafafa",
     alignItems: "center",
     justifyContent: "center",
-  },
-  text: {
-    fontFamily: "Karla-Regular",
   },
 });

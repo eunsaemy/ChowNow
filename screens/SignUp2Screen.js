@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
-    fontFamily: "Karla_600SemiBold",
   },
   marginTopMedium: {
     marginTop: 20,
@@ -144,7 +143,6 @@ const styles = StyleSheet.create({
     color: "#F57C00",
     fontWeight: "700",
     fontSize: 16,
-    fontFamily: "Karla_600SemiBold",
   },
   container: {
     margin: 20,
@@ -158,10 +156,8 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontSize: 24,
     marginBottom: 12,
-    fontFamily: "Karla_700Bold",
   },
   bodyText: {
     fontSize: 16,
-    fontFamily: "Karla_400Regular",
   },
 });

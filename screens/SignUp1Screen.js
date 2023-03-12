@@ -113,25 +113,21 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     marginTop: 40,
-    fontFamily: "Karla_600SemiBold",
   },
   buttonText: {
     color: "white",
     fontWeight: "700",
     fontSize: 16,
-    fontFamily: "Karla_600SemiBold",
   },
   heading3: {
     fontWeight: "700",
     fontSize: 24,
     paddingBottom: 12,
     textAlign: "center",
-    fontFamily: "Karla_700Bold",
   },
   bodyText: {
     textAlign: "center",
     fontSize: 16,
     paddingBottom: 20,
-    fontFamily: "Karla_400Regular",
   },
 });
