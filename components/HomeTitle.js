@@ -1,7 +1,23 @@
 import { TouchableOpacity, View, Text, Image } from "react-native";
 import { StyleSheet } from "react-native";
+import { auth, db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 
 export default function HomeTitle() {
+  const [address, setAddress] = useState("");
+
+  useEffect(() => {
+    const getAddress = async () => {
+      const docRef = doc(db, "Users", auth.currentUser.uid);
+      const docSnap = await getDoc(docRef);
+
+      setAddress(docSnap.data().address);
+    };
+
+    getAddress();
+  }, []);
+
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.dropdownContainer}>
@@ -11,7 +27,9 @@ export default function HomeTitle() {
           source={require("../assets/down-arrow-icon.png")}
         />
       </View>
-      <Text style={styles.bodyText}>3453 University Drive</Text>
+      <Text style={styles.bodyText}>
+        {address.streetNumber} {address.street}
+      </Text>
     </TouchableOpacity>
   );
 }
