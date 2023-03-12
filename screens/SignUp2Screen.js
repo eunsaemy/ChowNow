@@ -1,41 +1,81 @@
-import React, { useState } from 'react'
+import * as Location from 'expo-location'
+import React, { useEffect, useState } from 'react'
 import { auth, db } from '../firebase'
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
+import { StatusBar } from 'expo-status-bar'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 const SignUp2Screen = () => {
+    const [location, setLocation] = useState()
+    const [address, setAddress] = useState("")
+
+    // Location.setGoogleApiKey("AIzaSyB1WlOrQqoQWRuHjl6qIWjgLVCRnOJZlyw")
+
     const navigation = useNavigation()
 
-    const handleSignOut = () => {
-        auth
-            .signOut()
-            .then(() => {
-                navigation.replace("Login")
-            })
-            .catch((error) => alert(error.message))
+    useEffect(() => {
+        const getPermissions = async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== "granted") {
+                alert("Please grant location permissions")
+                return;
+            }
+
+            let currentLocation = await Location.getCurrentPositionAsync({});
+            setLocation(currentLocation);
+        };
+        getPermissions();
+    }, [])
+
+    const handleDone = () => {
+        navigation.replace("Home")
     }
 
-    const handleBack = () => {
-        navigation.replace("SignUp1")
+    const geocode = async () => {
+        const geocodedLocation = await Location.geocodeAsync(address)
+        console.log("Geocoded Address:", geocodedLocation)
+    }
+
+    const reverseGeocode = async () => {
+        const reverseGeocodeAddress = await Location.reverseGeocodeAsync({
+            longitude: location.coords.longitude,
+            latitude: location.coords.latitude
+        })
+        .catch((error) => alert(error.message))
+
+        let address = reverseGeocodeAddress[0]
+        // formatted_address = address.streetNumber + " " + address.street + ", " + address.city + ", " + address.region + " " + address.postalCode
+        // setAddress(formatted_address)
+        setAddress(address)
+
+        updateDoc(doc(db, "Users", auth.currentUser.uid), {
+            address: address
+        })
     }
 
     return (
-        <View style={styles.container}>
-            <Text>Email: {auth.currentUser.email}</Text>
-            <TouchableOpacity
-                onPress={handleBack}
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>Back</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={handleSignOut}
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>Sign Out</Text>
-            </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+        style={styles.container}
+        behavior="padding"
+        >
+            <View style={styles.container}>
+                <Text>{address.streetNumber} {address.street}, {address.city}, {address.region} {address.postalCode}</Text>
+                <TouchableOpacity
+                    onPress={reverseGeocode}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Get Current Location</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={handleDone}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Next</Text>
+                </TouchableOpacity>
+                <StatusBar style="auto" />
+            </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -46,6 +86,21 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    inputContainer: {
+        width: '80%'
+    },
+    input: {
+        backgroundColzontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 5,
+    },
+    buttonContainer: {
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
     },
     button: {
         backgroundColor: '#0782F9',
