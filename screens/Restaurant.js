@@ -7,7 +7,24 @@ import { StyleSheet } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import RadioButtonRN from "radio-buttons-react-native";
 
+import {
+  useFonts,
+  Karla_400Regular,
+  Karla_500Medium,
+  Karla_600SemiBold,
+  Karla_700Bold,
+  Karla_800ExtraBold,
+} from "@expo-google-fonts/karla";
+
 export default function RestaurantCard() {
+  let [fontsLoaded] = useFonts({
+    Karla_400Regular,
+    Karla_500Medium,
+    Karla_600SemiBold,
+    Karla_700Bold,
+    Karla_800ExtraBold,
+  });
+
   const data = [
     {
       label: "Myself",
@@ -178,10 +195,13 @@ const styles = StyleSheet.create({
   inputText: {
     fontSize: 16,
     color: "#212121",
+    fontFamily: "Karla_400Regular",
+    fontFamily: "Karla_400Regular",
   },
   captionText: {
     color: "#757575",
     marginBottom: 4,
+    fontFamily: "Karla_400Regular",
   },
   inputContainer: {
     padding: 8,
@@ -231,5 +251,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
+    fontFamily: "Karla_600SemiBold",
   },
 });

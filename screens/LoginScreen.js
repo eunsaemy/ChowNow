@@ -16,8 +16,42 @@ import {
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import {
+  useFonts,
+  Karla_200ExtraLight,
+  Karla_300Light,
+  Karla_400Regular,
+  Karla_500Medium,
+  Karla_600SemiBold,
+  Karla_700Bold,
+  Karla_800ExtraBold,
+  Karla_200ExtraLight_Italic,
+  Karla_300Light_Italic,
+  Karla_400Regular_Italic,
+  Karla_500Medium_Italic,
+  Karla_600SemiBold_Italic,
+  Karla_700Bold_Italic,
+  Karla_800ExtraBold_Italic,
+} from "@expo-google-fonts/karla";
 
 const LoginScreen = () => {
+  let [fontsLoaded] = useFonts({
+    Karla_200ExtraLight,
+    Karla_300Light,
+    Karla_400Regular,
+    Karla_500Medium,
+    Karla_600SemiBold,
+    Karla_700Bold,
+    Karla_800ExtraBold,
+    Karla_200ExtraLight_Italic,
+    Karla_300Light_Italic,
+    Karla_400Regular_Italic,
+    Karla_500Medium_Italic,
+    Karla_600SemiBold_Italic,
+    Karla_700Bold_Italic,
+    Karla_800ExtraBold_Italic,
+  });
+
   const [inputFocused, setInputFocused] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -130,6 +164,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 20,
     borderRadius: 10,
+    fontFamily: "Karla_400Regular",
     fontSize: 16,
   },
   buttonContainer: {
@@ -154,21 +189,25 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
+    fontFamily: "Karla_600SemiBold",
   },
   buttonOutlineText: {
     color: "#F57C00",
     fontWeight: "700",
     fontSize: 16,
+    fontFamily: "Karla_600SemiBold",
   },
   heading3: {
     fontWeight: "700",
     fontSize: 24,
     paddingBottom: 12,
     textAlign: "center",
+    fontFamily: "Karla_700Bold",
   },
   bodyText: {
     textAlign: "center",
     fontSize: 16,
     paddingBottom: 20,
+    fontFamily: "Karla_400Regular",
   },
 });
