@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+send_sms.js
 
 # macOS
 .DS_Store

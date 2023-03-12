@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const accountSid = "AC88c8b2334d2fcff752cb6624d220af53";
-const authToken = "1454b53937f57b2e45eb699c3b942f8b";
+const authToken = "8dee9f36036ddf00ad640870d15564d7";
 
 export const send_sms = async (msg) => {
   const response = await axios.post(

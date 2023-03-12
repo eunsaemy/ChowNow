@@ -38,7 +38,7 @@ const ConfirmScreen = () => {
     }, []);
   
     const handleBack = () => {
-      navigation.replace("HomeScreen")
+      navigation.replace("Home")
     }
   
     return (
