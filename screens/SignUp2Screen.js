@@ -36,7 +36,7 @@ const SignUp2Screen = () => {
   }, []);
 
   const handleDone = () => {
-    navigation.replace("HomeScreen");
+    navigation.replace("Home");
   };
 
   const geocode = async () => {

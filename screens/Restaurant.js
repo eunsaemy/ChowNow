@@ -5,6 +5,7 @@ import { ScrollView } from "react-native";
 import { Image } from "react-native";
 import { StyleSheet } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 import RadioButtonRN from "radio-buttons-react-native";
 
 export default function RestaurantCard() {
@@ -19,6 +20,12 @@ export default function RestaurantCard() {
       label: "No one is hurt",
     },
   ];
+
+  const navigation = useNavigation();
+
+  const handleSend = () => {
+    navigation.replace("Confirm");
+  }
 
   return (
     <View style={styles.container}>
@@ -107,7 +114,7 @@ export default function RestaurantCard() {
           </View>
         </ScrollView>
 
-        <TouchableOpacity style={[styles.button, styles.buttonPrimary]}>
+        <TouchableOpacity onPress={handleSend} style={[styles.button, styles.buttonPrimary]}>
           <Text style={styles.buttonText}>Enable location services</Text>
         </TouchableOpacity>
       </View>
