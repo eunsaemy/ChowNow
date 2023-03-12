@@ -23,6 +23,10 @@ export default function RestaurantCard() {
 
   const navigation = useNavigation();
 
+  const handleBack = () => {
+    navigation.replace("Home");
+  }
+
   const handleSend = () => {
     navigation.replace("Confirm");
   }
@@ -34,7 +38,7 @@ export default function RestaurantCard() {
           style={styles.image}
           source={require("../assets/burger-img.png")}>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity onPress={handleBack} style={styles.iconButton}>
               <Image
                 style={styles.iconButtonImage}
                 source={require("../assets/close-icon-button.png")}></Image>
