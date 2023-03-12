@@ -1,19 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import useNavigation from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "react-native-ionicons";
 import HomeScreen from "./screens/HomeScreen";
+import HomeTitle from "./components/HomeTitle";
 import ProfileScreen from "./screens/ProfileScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignUp1Screen from "./screens/SignUp1Screen";
-import { Image } from "react-native";
 import SignUp2Screen from "./screens/SignUp2Screen";
-import HomeTitle from "./components/HomeTitle";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Image } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { useCallback } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +31,7 @@ function Home({ navigation }) {
         tabBarActiveTintColor: "#F57C00",
       })}>
       <Tab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={{
           headerTitle: (props) => <HomeTitle {...props} />,
