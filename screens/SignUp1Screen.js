@@ -1,29 +1,44 @@
-import React from 'react'
-import { auth } from '../firebase'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import { auth, db } from '../firebase'
+import { doc, updateDoc } from 'firebase/firestore'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 const SignUp1Screen = () => {
+    const [phone, setPhone] = useState('')
+
     const navigation = useNavigation()
 
-    const handleSignOut = () => {
-        auth
-            .signOut()
-            .then(() => {
-                navigation.replace("Login")
-            })
-            .catch((error) => alert(error.message))
+    const handlePhone = () => {
+        updateDoc(doc(db, "Users", auth.currentUser.uid), {
+            phone: phone
+        })
+        navigation.replace("SignUp2")
     }
+
     return (
-        <View style={styles.container}>
-            <Text>Email: {auth.currentUser?.email}</Text>
-            <TouchableOpacity
-                onPress={handleSignOut}
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>Sign Out</Text>
-            </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior="padding"
+        >
+            <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder = "Phone number"
+                    value={phone}
+                    onChangeText={text => setPhone(text)}
+                    style={styles.input}
+                    keyboardType="numeric"
+                />
+            </View>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                    onPress={handlePhone}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Next</Text>
+                </TouchableOpacity>
+            </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -34,6 +49,21 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    inputContainer: {
+        width: '80%'
+    },
+    input: {
+        backgroundColzontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 5,
+    },
+    buttonContainer: {
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
     },
     button: {
         backgroundColor: '#0782F9',

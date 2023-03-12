@@ -28,7 +28,7 @@ const LoginScreen = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 setDoc(doc(db, "Users", user.uid), {
-                    email: user.email,
+                    email: user.email
                 })
                 navigation.replace("SignUp1")
             })
@@ -40,6 +40,7 @@ const LoginScreen = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 navigation.replace("Home")
+                // navigation.replace("SignUp1")
             })
             .catch((error) => alert(error.message))
     };
