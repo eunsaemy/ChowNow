@@ -26,4 +26,4 @@ When designing a product, we wanted to design for a problem space with a clear n
 - User control and freedom We knew that users of this app would need user control and freedom. At times, their lives literally depends on it. The user can toggle between different states to disguise the application as a typical takeout app to not raise suspicion from their abusers.
 
 ### Links
-[Figma](https://www.figma.com/proto/9RsuTx3qRiindT4YsXA8Xt/CHOWNOW?page-id=0%3A1&node-id=1%3A6108&viewport=-187%2C-113%2C1&scaling=min-zoom&starting-point-node-id=17%3A8167)
+- [Figma](https://www.figma.com/proto/9RsuTx3qRiindT4YsXA8Xt/CHOWNOW?page-id=0%3A1&node-id=1%3A6108&viewport=-187%2C-113%2C1&scaling=min-zoom&starting-point-node-id=17%3A8167)
