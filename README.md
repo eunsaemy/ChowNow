@@ -1,6 +1,6 @@
 # ChowNow
 
-### cmd-f 2023
+### 👑 cmd-f 2023 👑
 - Podium Prize: 1st place
 - Iris Labs Sponsor Prizes: Best design
 
