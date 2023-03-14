@@ -5,7 +5,7 @@
 - Iris Labs Sponsor Prize: Best design
 
 ### Problem statement
-In 2019, a woman in Ohio reported an incident of domestic abuse by pretending to order a pizza. THe discretion was imperative because the abuser was in the same room as her. After further research, we learned that domestic violence reports increase during large sporting events. As we proceeded throughout cmd-f, we asked ourselves: how might we provide victims of domestic violence a discreet way of reporting abuse?
+In 2019, a woman in Ohio reported an incident of domestic abuse by pretending to order a pizza. The discretion was imperative because the abuser was in the same room as her. After further research, we learned that domestic violence reports increase during large sporting events. As we proceeded throughout cmd-f, we asked ourselves: how might we provide victims of domestic violence a discreet way of reporting abuse?
 
 ### Research
 We learned that during sporting events, sports enjoyers' plans typically involve food. The takeout application Deliveroo says that orders on their app rose on average by 25% during the hour prior to each of England’s Group Stage kickoffs, and the team’s final group match Vs. Belgium they claimed was their “busiest ever dinner service for a Thursday night.” We decided to amalgamate these two spaces to create a solution for victims to request for help, disguised in the form of a typical takeout delivery application to not risk the suspicion of their abusers.
