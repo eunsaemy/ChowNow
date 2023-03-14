@@ -1,6 +1,6 @@
 # ChowNow
 
-### 👑 Winner of cmd-f 2023 Hackathon 👑
+### 👑 Winner of cmd-f 2023 hackathon 👑
 - Podium Prize: 1st place
 - Iris Labs Sponsor Prize: Best design
 
