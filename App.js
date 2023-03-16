@@ -5,6 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import HomeTitle from "./components/HomeTitle";
 import ProfileScreen from "./screens/ProfileScreen";
 import LoginScreen from "./screens/LoginScreen";
+import SignUpScreen from "./screens/SignUpScreen";
 import SignUp1Screen from "./screens/SignUp1Screen";
 import SignUp2Screen from "./screens/SignUp2Screen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -112,6 +113,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="SignUp"
+          component={SignUpScreen}
+        />
         <Stack.Screen
           options={{ headerShown: false }}
           name="Login"

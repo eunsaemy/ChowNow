@@ -25,16 +25,19 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        navigation.replace("SignUp2");
-      })
-      .catch((error) => alert(error.message));
+    navigation.replace("Login");
   };
 
   const handleSignUp = () => {
-    navigation.replace("SignUp");
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setDoc(doc(db, "Users", user.uid), {
+          email: user.email,
+        });
+        navigation.replace("SignUp1");
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -51,8 +54,8 @@ const LoginScreen = () => {
       )}
 
       <View style={styles.inputContainer}>
-        <Text style={styles.heading3}>Get ready to chow.</Text>
-        <Text style={styles.bodyText}>Log in to your ChowNow account.</Text>
+        <Text style={styles.heading3}>Chow anytime, chow now.</Text>
+        <Text style={styles.bodyText}>Create your ChowNow account today!</Text>
 
         <TextInput
           placeholder="Email"
@@ -75,14 +78,14 @@ const LoginScreen = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={handleLogin}
+          onPress={handleSignUp}
           style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSignUp}
+          onPress={handleLogin}
           style={[styles.button, styles.buttonOutline]}>
-          <Text style={styles.buttonOutlineText}>Sign Up</Text>
+          <Text style={styles.buttonOutlineText}>Log in</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
