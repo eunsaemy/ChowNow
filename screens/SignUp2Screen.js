@@ -2,14 +2,11 @@ import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import { StatusBar } from "expo-status-bar";
-import { Image } from "react-native";
 import {
   ActivityIndicator,
-  KeyboardAvoidingView,
+  Image,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -17,13 +14,14 @@ import { useNavigation } from "@react-navigation/native";
 
 const SignUp2Screen = () => {
   const [location, setLocation] = useState();
-  const [address, setAddress] = useState("Current Address");
+  const [address, setAddress] = useState("Current location");
 
   const navigation = useNavigation();
 
   useEffect(() => {
     const getPermissions = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
+
       if (status !== "granted") {
         alert("Please grant location permissions");
         return;
@@ -33,15 +31,21 @@ const SignUp2Screen = () => {
       setLocation(currentLocation);
     };
     getPermissions();
+    reverseGeocode();
   }, []);
 
-  const handleDone = () => {
-    navigation.replace("Home");
-  };
+  const handleSkip = () => {
+    let default_address = {streetNumber: "123",
+      street: "Main St",
+      city: "Vancouver",
+      region: "BC",
+      postalCode: "V2N 3K4"};
 
-  const geocode = async () => {
-    const geocodedLocation = await Location.geocodeAsync(address);
-    console.log("Geocoded Address:", geocodedLocation);
+    updateDoc(doc(db, "Users", auth.currentUser.uid), {
+      address: default_address,
+    });
+
+    navigation.replace("Home");
   };
 
   const reverseGeocode = async () => {
@@ -68,7 +72,7 @@ const SignUp2Screen = () => {
         />
       </View>
 
-      <View>
+      <View style={styles.inputContainer}>
         <Text style={styles.heading3}>
           Allow location access for a better chowing experience
         </Text>
@@ -76,31 +80,33 @@ const SignUp2Screen = () => {
           Enabling location services will make it easier for you to find nearby
           restaurants and place orders for delivery or pickup.
         </Text>
-
-        {address === "Current Address" ? (
-          <Text>
-            <ActivityIndicator size="large" />
-          </Text>
-        ) : (
-          <Text>
-            {address.streetNumber} {address.street}, {address.city},{" "}
-            {address.region} {address.postalCode}
-          </Text>
-        )}
       </View>
 
       <View style={styles.buttonContainer}>
+        {address === "Current location" ?
+          (
+            <Text style={styles.loading}>
+              <ActivityIndicator size="large" />
+            </Text>
+          )
+          :
+          (
+            <Text style={styles.loading}>
+              {address.streetNumber} {address.street}, {address.city},{" "}
+              {address.region} {address.postalCode}
+            </Text>
+          )
+        }
         <TouchableOpacity
           onPress={reverseGeocode}
-          style={[styles.button, styles.buttonPrimary]}>
+          style={[styles.button]}>
           <Text style={styles.buttonText}>Enable location services</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleDone}
-          style={[styles.buttonOutline, styles.button, styles.marginTopMedium]}>
-          <Text style={styles.buttonOutlineText}>Continue</Text>
+          onPress={handleSkip}
+          style={[styles.button, styles.buttonOutline]}>
+          <Text style={styles.buttonOutlineText}>Skip</Text>
         </TouchableOpacity>
-        <StatusBar style="auto" />
       </View>
     </View>
   );
@@ -109,34 +115,45 @@ const SignUp2Screen = () => {
 export default SignUp2Screen;
 
 const styles = StyleSheet.create({
-  imageContainer: { flex: 1, marginBottom: 20 },
+  container: {
+    display: "flex",
+    flex: 1,
+    justifyContent: "space-between",
+    margin: 20,
+    marginBottom: 40,
+    marginTop: 80,
+  },
+  imageContainer: {
+    flex: 1,
+    marginBottom: 20,
+  },
   image: {
     flex: 1,
-    width: null,
     height: null,
+    width: null,
     resizeMode: "contain",
   },
-  buttonPrimary: {
-    backgroundColor: "#F57C00",
+  buttonContainer: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "flex-end",
   },
   button: {
-    width: "100%",
-    padding: 16,
-    borderRadius: 12,
     alignItems: "center",
-  },
-  buttonOutline: {
-    backgroundColor: "transparent",
-    marginTop: 20,
-    borderColor: "#F57C00",
-    borderWidth: 1,
+    backgroundColor: "#F57C00",
+    borderRadius: 12,
+    padding: 16,
+    width: "100%",
   },
   buttonText: {
     color: "white",
-    fontWeight: "700",
     fontSize: 16,
+    fontWeight: "700",
   },
-  marginTopMedium: {
+  buttonOutline: {
+    backgroundColor: "transparent",
+    borderColor: "#F57C00",
+    borderWidth: 1,
     marginTop: 20,
   },
   buttonOutlineText: {
@@ -144,20 +161,18 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-  container: {
-    margin: 20,
-    display: "flex",
-    marginTop: 80,
-    flex: 1,
-    marginBottom: 40,
-    justifyContent: "space-between",
-  },
-  heading3: {
-    fontWeight: 500,
-    fontSize: 24,
-    marginBottom: 12,
-  },
   bodyText: {
     fontSize: 16,
+    paddingBottom: 20,
+    textAlign: "center",
+  },
+  heading3: {
+    fontSize: 24,
+    fontWeight: "500",
+    marginBottom: 12,
+    textAlign: "center",
+  },
+  loading: {
+    paddingBottom: 12,
   },
 });

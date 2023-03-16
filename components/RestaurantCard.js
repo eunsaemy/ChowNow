@@ -1,8 +1,11 @@
-import { ImageBackground, View } from "react-native";
-import { StyleSheet } from "react-native";
-import { Text } from "react-native";
-import { Image } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { 
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
 export default function RestaurantCard() {
@@ -37,25 +40,28 @@ export default function RestaurantCard() {
 
 const styles = StyleSheet.create({
   restaurantImage: {
-    height: 200,
-    width: "100%",
-    overflow: "hidden",
     borderRadius: 12,
+    height: 200,
     marginBottom: 8,
+    overflow: "hidden",
+    width: "100%",
   },
-  restaurantCard: { marginBottom: 20 },
-  restaurantImageContainer: {},
+  restaurantCard: {
+    marginBottom: 20,
+  },
+  restaurantImageContainer: {
+  },
   starRatingContainer: {
+    alignItems: "center",
+    alignSelf: "flex-end",
+    backgroundColor: "#21212175",
+    borderRadius: 20,
     display: "flex",
     gap: 4,
     flexDirection: "row",
-    padding: 8,
-    borderRadius: 20,
-    overflow: "hidden",
-    backgroundColor: "#21212175",
-    alignSelf: "flex-end",
     margin: 8,
-    alignItems: "center",
+    overflow: "hidden",
+    padding: 8,
   },
   starRating: {
     color: "white",
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
   },
   captionText: {
-    fontSize: 14,
     color: "#757575",
+    fontSize: 14,
   },
 });

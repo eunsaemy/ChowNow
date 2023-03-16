@@ -2,26 +2,32 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import {
+  Image,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const SignUp1Screen = () => {
-  const [phone, setPhone] = useState("");
-
   const [inputFocused, setInputFocused] = useState(false);
+  const [phone, setPhone] = useState("");
 
   const navigation = useNavigation();
 
   const handlePhone = () => {
+    let formatted_phone = phone.replace(/-/g, "");
+    formatted_phone = formatted_phone.replace(" ", "");
+    formatted_phone = formatted_phone.replace(".", "");
+    formatted_phone = formatted_phone.replace("(", "");
+    formatted_phone = formatted_phone.replace(")", "");
+    formatted_phone = "+1" + formatted_phone;
+
     updateDoc(doc(db, "Users", auth.currentUser.uid), {
-      phone: phone,
+      phone: formatted_phone,
     });
     navigation.replace("SignUp2");
   };
@@ -59,11 +65,18 @@ const SignUp1Screen = () => {
         />
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={handlePhone}
-            style={styles.button}>
-            <Text style={styles.buttonText}>Next</Text>
-          </TouchableOpacity>
+          { phone === "" ? 
+            <TouchableOpacity
+              style={styles.button}>
+              <Text style={styles.buttonText}>Continue</Text>
+            </TouchableOpacity>
+          :
+            <TouchableOpacity
+              onPress={handlePhone}
+              style={styles.button}>
+              <Text style={styles.buttonText}>Continue</Text>
+            </TouchableOpacity>
+          }
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -73,61 +86,63 @@ const SignUp1Screen = () => {
 export default SignUp1Screen;
 
 const styles = StyleSheet.create({
-  imageContainer: { flex: 1, marginBottom: 20 },
-  image: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: "contain",
-  },
   container: {
-    marginTop: 80,
-    margin: 20,
     display: "flex",
     flex: 1,
+    margin: 20,
     marginBottom: 40,
-    // justifyContent: "space-between",
+    marginTop: 80,
+  },
+  imageContainer: {
+    flex: 1,
+    marginBottom: 20,
+  },
+  image: {
+    flex: 1,
+    height: null,
+    width: null,
+    resizeMode: "contain",
   },
   inputContainer: {
-    width: "100%",
     flex: 1,
+    width: "100%",
   },
   input: {
     backgroundColor: "white",
-    paddingHorizontal: 15,
-    paddingVertical: 20,
     borderRadius: 10,
     fontSize: 16,
+    paddingHorizontal: 15,
+    paddingVertical: 20,
   },
   buttonContainer: {
-    width: "100%",
-    justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
     flex: 1,
+    justifyContent: "center",
+    marginTop: 40,
+    width: "100%",
   },
   button: {
-    backgroundColor: "#F57C00",
-    width: "100%",
-    padding: 16,
-    borderRadius: 12,
     alignItems: "center",
+    backgroundColor: "#F57C00",
+    borderRadius: 12,
     marginTop: 40,
+    padding: 16,
+    width: "100%",
   },
   buttonText: {
     color: "white",
-    fontWeight: "700",
     fontSize: 16,
-  },
-  heading3: {
     fontWeight: "700",
-    fontSize: 24,
-    paddingBottom: 12,
-    textAlign: "center",
   },
   bodyText: {
-    textAlign: "center",
     fontSize: 16,
     paddingBottom: 20,
+    textAlign: "center",
+  },
+  heading3: {
+    fontSize: 24,
+    fontWeight: "700",
+    paddingBottom: 12,
+    textAlign: "center",
   },
 });

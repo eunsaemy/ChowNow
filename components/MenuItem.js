@@ -1,7 +1,9 @@
-import { View } from "react-native";
-import { StyleSheet } from "react-native";
-import { Image } from "react-native";
-import { Text } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function MenuItem() {
   return (
@@ -29,22 +31,22 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   containerImage: {
-    width: 52,
     borderRadius: 8,
     height: 52,
+    width: 52,
   },
   heading5: {
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: "600",
     marginBottom: 8,
   },
   heading6: {
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: "500",
     marginBottom: 4,
   },
   bodyText: {
-    fontSize: 14,
     color: "#757575",
+    fontSize: 14,
   },
 });

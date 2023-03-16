@@ -1,8 +1,13 @@
-import { TouchableOpacity, View, Text, Image } from "react-native";
-import { StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function HomeTitle() {
   const [address, setAddress] = useState("");
@@ -39,19 +44,22 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   dropdownContainer: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     gap: 4,
-    alignItems: "center",
     justifyContent: "center",
   },
-  dropdownImage: { width: 16, height: 16 },
+  dropdownImage: {
+    height: 16,
+    width: 16,
+  },
   bodyText: {
-    fontSize: 14,
     color: "#212121",
+    fontSize: 14,
   },
   captionText: {
-    fontSize: 12,
     color: "#757575",
+    fontSize: 12,
   },
 });
