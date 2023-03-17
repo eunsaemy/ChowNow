@@ -140,10 +140,15 @@ export default function App() {
           component={SignUp1Screen}
         />
         <Stack.Screen
-          styles="style.text"
           name="SignUp2"
+          styles="style.text"
           options={{ headerShown: false }}
           component={SignUp2Screen}
+        />
+        <Stack.Screen
+          name="Profile"
+          options={{ headerShown: false }}
+          component={ProfileScreen}
         />
         <Stack.Screen
           name="Confirm"

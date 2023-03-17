@@ -23,7 +23,7 @@ const LoginScreen = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigation.replace("SignUp2");
+        navigation.replace("Profile");
       })
       .catch((error) => alert(error.message));
   };
@@ -72,12 +72,12 @@ const LoginScreen = () => {
         <TouchableOpacity
           onPress={handleLogin}
           style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}>
-          <Text style={styles.buttonOutlineText}>Sign Up</Text>
+          <Text style={styles.buttonOutlineText}>Sign up</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

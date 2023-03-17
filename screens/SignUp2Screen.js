@@ -34,17 +34,21 @@ const SignUp2Screen = () => {
     reverseGeocode();
   }, []);
 
-  const handleSkip = () => {
-    let default_address = {streetNumber: "123",
-      street: "Main St",
-      city: "Vancouver",
-      region: "BC",
-      postalCode: "V2N 3K4"};
+  // const handleSkip = () => {
+  //   let default_address = {streetNumber: "123",
+  //     street: "Main St",
+  //     city: "Vancouver",
+  //     region: "BC",
+  //     postalCode: "V2N 3K4"};
 
-    updateDoc(doc(db, "Users", auth.currentUser.uid), {
-      address: default_address,
-    });
+  //   updateDoc(doc(db, "Users", auth.currentUser.uid), {
+  //     address: default_address,
+  //   });
 
+  //   navigation.replace("Home");
+  // };
+
+  const handleContinue = () => {
     navigation.replace("Home");
   };
 
@@ -103,9 +107,9 @@ const SignUp2Screen = () => {
           <Text style={styles.buttonText}>Enable location services</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSkip}
+          onPress={handleContinue}
           style={[styles.button, styles.buttonOutline]}>
-          <Text style={styles.buttonOutlineText}>Skip</Text>
+          <Text style={styles.buttonOutlineText}>Continue</Text>
         </TouchableOpacity>
       </View>
     </View>
