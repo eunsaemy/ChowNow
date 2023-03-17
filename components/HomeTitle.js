@@ -32,9 +32,16 @@ export default function HomeTitle() {
           source={require("../assets/down-arrow-icon.png")}
         />
       </View>
-      <Text style={styles.bodyText}>
-        {address.streetNumber} {address.street}
-      </Text>
+      { address === undefined
+      ?
+        <Text style={styles.bodyText}>
+          No current location
+        </Text>
+      :
+        <Text style={styles.bodyText}>
+          {address.streetNumber} {address.street}
+        </Text>
+      }
     </TouchableOpacity>
   );
 }

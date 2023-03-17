@@ -1,7 +1,7 @@
 import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import {
   ActivityIndicator,
   Image,
@@ -48,7 +48,7 @@ const SignUp2Screen = () => {
   //   navigation.replace("Home");
   // };
 
-  const handleContinue = () => {
+  const handleSkip = () => {
     navigation.replace("Home");
   };
 
@@ -87,7 +87,7 @@ const SignUp2Screen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        {address === "Current location" ?
+        { address === "Current location" ?
           (
             <Text style={styles.loading}>
               <ActivityIndicator size="large" />
@@ -107,9 +107,9 @@ const SignUp2Screen = () => {
           <Text style={styles.buttonText}>Enable location services</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleContinue}
+          onPress={handleSkip}
           style={[styles.button, styles.buttonOutline]}>
-          <Text style={styles.buttonOutlineText}>Continue</Text>
+          <Text style={styles.buttonOutlineText}>Skip</Text>
         </TouchableOpacity>
       </View>
     </View>

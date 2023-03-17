@@ -18,6 +18,10 @@ const SignUp1Screen = () => {
 
   const navigation = useNavigation();
 
+  const handleEmpty = () => {
+    alert("Please enter a phone number");
+  };
+
   const handlePhone = () => {
     let formatted_phone = phone.replace(/-/g, "");
     formatted_phone = formatted_phone.replace(" ", "");
@@ -67,6 +71,7 @@ const SignUp1Screen = () => {
         <View style={styles.buttonContainer}>
           { phone === "" ? 
             <TouchableOpacity
+              onPress={handleEmpty}
               style={styles.button}>
               <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>

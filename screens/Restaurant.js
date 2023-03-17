@@ -1,17 +1,19 @@
-import { View } from "react-native";
-import { Text } from "react-native";
-import { ImageBackground } from "react-native";
-import { ScrollView } from "react-native";
-import { Image } from "react-native";
-import { StyleSheet } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import React, { useEffect, useState } from "react";
+import { auth, db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 // import RadioButtonRN from "radio-buttons-react-native";
-import React, { useEffect, useState } from "react";
 import MenuItem from "../components/MenuItem";
-import { send_sms } from "../send_sms";
-import { auth, db } from "../firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
 
 export default function RestaurantCard() {
   const [address, setAddress] = useState("");
@@ -63,10 +65,15 @@ export default function RestaurantCard() {
     let address = await getAddress();
     let phone = await getPhone();
 
-    let formatted_msg = `Please send help to ${phone} at ${address.streetNumber} ${address.street}, ${address.city}, ${address.region} ${address.postalCode}`;
-    // setMsg(formatted_msg);
-    // send_sms(formatted_msg);
+    let formatted_msg = "";
+
+    if (address === undefined) {
+      formatted_msg = `Please send help to ${phone}`;
+    } else {
+      formatted_msg = `Please send help to ${phone} at ${address.streetNumber} ${address.street}, ${address.city}, ${address.region} ${address.postalCode}`;
+    }
     console.log(formatted_msg);
+    
     navigation.replace("Confirm");
   };
 
@@ -153,9 +160,16 @@ export default function RestaurantCard() {
                   source={require("../assets/location-icon.png")}></Image>
                 <View>
                   <Text style={styles.captionText}>Your location</Text>
-                  <Text style={styles.inputText}>
-                    {address.streetNumber} {address.street}
-                  </Text>
+                  { address === undefined
+                  ?
+                    <Text style={styles.inputText}>
+                      No current location
+                    </Text>
+                  :
+                    <Text style={styles.inputText}>
+                      {address.streetNumber} {address.street}
+                    </Text>
+                  }
                 </View>
               </View>
             </View>
@@ -304,7 +318,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-
   buttonPrimary: {
     backgroundColor: "#F57C00",
   },

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { send_sms } from "../send_sms";
 import { auth, db } from '../firebase'
-import { collection, doc, getDoc } from 'firebase/firestore'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { doc, getDoc } from 'firebase/firestore'
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { send_sms } from "../send_sms";
 
 const ConfirmScreen = () => {
-    const [msg, setMsg] = useState('');
+    const [msg, setMsg] = useState("");
     const navigation = useNavigation();
   
     useEffect(() => {
@@ -27,11 +32,18 @@ const ConfirmScreen = () => {
       const getMsg = async () => {
         let address = await getAddress();
         let phone = await getPhone();
-  
-        let formatted_msg = `Please send help to ${phone} at ${address.streetNumber} ${address.street}, ${address.city}, ${address.region} ${address.postalCode}`;
+
+        let formatted_msg = "";
+
+        if (address === undefined) {
+          formatted_msg = `Please send help to ${phone}`;
+        } else {
+          formatted_msg = `Please send help to ${phone} at ${address.streetNumber} ${address.street}, ${address.city}, ${address.region} ${address.postalCode}`;
+        }
+        console.log(formatted_msg);
+
         setMsg(formatted_msg);
         send_sms(formatted_msg);
-        // console.log(formatted_msg);
       };
       
       getMsg();

@@ -23,7 +23,7 @@ const LoginScreen = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigation.replace("Profile");
+        navigation.replace("SignUp2");
       })
       .catch((error) => alert(error.message));
   };
