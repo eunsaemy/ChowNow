@@ -31,4 +31,5 @@ When designing a product, we wanted to design for a problem space with a clear n
 - [Twilio](https://www.twilio.com/)
 
 ### To run the program
+- ```npm install```
 - ```npx expo start```
