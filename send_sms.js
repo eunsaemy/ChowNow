@@ -1,14 +1,15 @@
+import { ACCOUNT_SID, AUTH_TOKEN, API_URL, TEXT_FROM, TEXT_TO } from '@env';
 import axios from "axios";
 
-const accountSid = "AC88c8b2334d2fcff752cb6624d220af53";
-const authToken = "8dee9f36036ddf00ad640870d15564d7";
+const accountSid = ACCOUNT_SID;
+const authToken = AUTH_TOKEN;
 
 export const send_sms = async (msg) => {
   const response = await axios.post(
-    "https://api.twilio.com/2010-04-01/Accounts/AC88c8b2334d2fcff752cb6624d220af53/Messages.json", {
+    API_URL, {
       Body: msg,
-      From: "+15746867670",
-      To: "+17788661552"
+      From: TEXT_FROM,
+      To: TEXT_TO
     }, {
       headers: {
         "content-type": "application/x-www-form-urlencoded"
