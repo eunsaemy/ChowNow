@@ -30,4 +30,4 @@ When designing a product, we wanted to design for a problem space with a clear n
 - [Devpost](https://devpost.com/software/chow-now)
 
 ### To run the program
-```npx expo start```
+- ```npx expo start```
