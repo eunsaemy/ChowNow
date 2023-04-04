@@ -4,7 +4,7 @@
 - Podium Prize: 1st place
 - Iris Labs Sponsor Prize: Best design
 
-[![Watch the video]](https://youtu.be/File-i47Iss)
+[![Watch the video](https://img.youtube.com/vi/File-i47Iss&list=PLkaHuz8DxJ239V6xs-W4dXXigdGP5ZaRc&index=7/maxresdefault.jpg)](https://youtu.be/File-i47Iss)
 
 
 ### Problem statement
