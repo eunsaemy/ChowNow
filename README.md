@@ -1,4 +1,4 @@
-# ChowNow
+# Chow Now
 
 ### 👑 Winner of cmd-f 2023 hackathon 👑
 - Podium Prize: 1st place
